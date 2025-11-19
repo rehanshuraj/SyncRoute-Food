@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { setUserData } from "../redux/userSlice"; 
+
 function useGetCurrentUser(){
     const  dispatch = useDispatch();
     useEffect(()=>{
@@ -9,7 +10,7 @@ function useGetCurrentUser(){
         const fetchCurrentUser= async()=>{
 
             try{
-                const response = await axios.get("http://localhost:8000/api/user/current-user",{credentials:"include"});
+                const response = await axios.get("http://localhost:8000/api/user/current-user",{withCredentials:true});
                
                 console.log("Current user data:",response.data);
                 dispatch(setUserData(response.data));

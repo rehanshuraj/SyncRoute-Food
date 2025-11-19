@@ -2,10 +2,12 @@ import jwt from "jsonwebtoken";
 export const isAuth = (req, res, next) => {
     try{
         const token = req.cookies.token;
+        // console.log("Cookies coming from frontend:", req.cookies);  // 👈 ADD THIS
         if(!token){
             return res.status(401).json({message: "unauthenticated user"})
         }
-        const decodeToken = jwt.verify(token,process.env.JWT_SECRET_KEY);
+        const decodeToken = jwt.verify(token,process.env.JWT_SECRET);
+        console.log("Decoded token:", decodeToken);
         if(!decodeToken){
             return res.status(401).json({message: "unauthenticated user"})
         }
